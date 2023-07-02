@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -83,5 +84,52 @@ public class BaseTest {
     protected static void clickSaveButton(){
         WebElement saveButton = driver.findElement(By.cssSelector("button.btn-submit"));
 
+    }
+
+
+    //HOMEWORK 17 BELOW
+    //
+    //
+    //
+    //
+    //
+
+    protected void verifySuccessMessageText() {
+        WebElement successNewPlaylist = driver.findElement(By.xpath(
+                "//div[contains(text(), 'new playlist17')]"));
+        Assert.assertTrue(successNewPlaylist.isDisplayed());
+    }
+
+    protected void selectSavePlaylist() {
+        WebElement savePlaylistButton = driver.findElement(By.xpath("//*[@id='songResultsWrapper']/header/div[3]/div/section[2]/form/button"));
+        savePlaylistButton.click();
+    }
+
+    protected void enterNewPlaylistName(String newPlaylistName) {
+        WebElement createPlaylistField = driver.findElement(By.xpath("//*[@id='songResultsWrapper']/header/div[3]/div/section[2]/form/input"));
+        createPlaylistField.click();
+        createPlaylistField.sendKeys(newPlaylistName);
+    }
+
+    protected void clickAddTo() {
+        WebElement addToButton = driver.findElement(By.cssSelector("[class='btn-add-to']"));
+        addToButton.click();
+    }
+
+    protected void clickFirstSong() {
+        WebElement firstSong = driver.findElement(By.xpath("//*[@id='songResultsWrapper']/div/div/div[1]/table/tr"));
+        firstSong.click();
+    }
+
+    protected void clickViewAll() {
+        WebElement viewAllButton = driver.findElement(By.cssSelector("[data-test='view-all-songs-btn']"));
+        viewAllButton.click();
+
+    }
+
+    protected void searchSongName(String songName) {
+        WebElement searchField = driver.findElement(By.cssSelector("[name='q']"));
+        searchField.click();
+        searchField.sendKeys(songName);
     }
 }
