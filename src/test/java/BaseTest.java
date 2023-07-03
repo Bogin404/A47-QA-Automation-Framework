@@ -101,12 +101,14 @@ public class BaseTest {
     }
 
     protected void selectSavePlaylist() {
-        WebElement savePlaylistButton = driver.findElement(By.xpath("//*[@id='songResultsWrapper']/header/div[3]/div/section[2]/form/button"));
+        WebElement savePlaylistButton = driver.findElement(By.xpath(
+                "//*[@id='songResultsWrapper']//button[@title='Save']"));
         savePlaylistButton.click();
     }
 
     protected void enterNewPlaylistName(String newPlaylistName) {
-        WebElement createPlaylistField = driver.findElement(By.xpath("//*[@id='songResultsWrapper']/header/div[3]/div/section[2]/form/input"));
+        WebElement createPlaylistField = driver.findElement(By.xpath(
+                "//*[@id='songResultsWrapper']//input[@data-test='new-playlist-name']"));
         createPlaylistField.click();
         createPlaylistField.sendKeys(newPlaylistName);
     }
@@ -117,7 +119,8 @@ public class BaseTest {
     }
 
     protected void clickFirstSong() {
-        WebElement firstSong = driver.findElement(By.xpath("//*[@id='songResultsWrapper']/div/div/div[1]/table/tr"));
+        WebElement firstSong = driver.findElement(By.xpath(
+                "(//*[@id='songResultsWrapper']//tr[contains(@class,'song-item')])[1]"));
         firstSong.click();
     }
 
@@ -131,5 +134,29 @@ public class BaseTest {
         WebElement searchField = driver.findElement(By.cssSelector("[name='q']"));
         searchField.click();
         searchField.sendKeys(songName);
+    }
+
+
+
+    //HOMEWORK 18 BELOW
+    //
+    //
+    //
+    //
+    //
+
+    protected void verifySongPlaying() {
+        WebElement progressBar = driver.findElement(By.cssSelector("[class='plyr__progress--played']"));
+        Assert.assertTrue(progressBar.isDisplayed());
+    }
+
+    protected void clickPlay() {
+        WebElement playControl = driver.findElement(By.cssSelector("span[class='play']"));
+        playControl.click();
+    }
+
+    protected void clickPlayNext() {
+        WebElement playNextControl = driver.findElement(By.cssSelector("[class='next fa fa-step-forward control']"));
+        playNextControl.click();
     }
 }
