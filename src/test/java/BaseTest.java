@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import java.time.Duration;
 import java.util.UUID;
@@ -22,12 +23,15 @@ public class BaseTest {
     }
 
     @BeforeMethod
-            public void launchBrowser() {
+    @Parameters({"BaseURL"})
+            public void launchBrowser(String BaseURL) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        String url = BaseURL;
+        driver.get(url);
     }
 
     @AfterMethod
@@ -55,10 +59,7 @@ public class BaseTest {
 
     }
 
-    protected static void openLoginURL() {
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-    }
+
 
     protected static void clickAvatarIcon(){
         WebElement avatarIcon = driver.findElement(By.cssSelector("img.avatar"));
@@ -158,5 +159,33 @@ public class BaseTest {
     protected void clickPlayNext() {
         WebElement playNextControl = driver.findElement(By.cssSelector("[class='next fa fa-step-forward control']"));
         playNextControl.click();
+    }
+
+
+    //HOMEWORK 19 BELOW
+    //
+    //
+    //
+    //
+    //
+    //
+
+    protected String  verifyConfirmationText() {
+        WebElement successDeletedPlaylist = driver.findElement(By.cssSelector("div.success.show"));
+        return successDeletedPlaylist.getText();
+    }
+
+    protected void removePlaylist() {
+        WebElement deletePlaylistButton = driver.findElement(By.cssSelector("[class='del btn-delete-playlist']"));
+        deletePlaylistButton.click();
+
+        WebElement confirmDeletePlaylist = driver.findElement(By.cssSelector("[class='ok']"));
+        confirmDeletePlaylist.click();
+    }
+
+    protected void clickPlaylist() {
+        WebElement playlistToDelete = driver.findElement(By.cssSelector("[href='#!/playlist/63201']"));
+        playlistToDelete.click();
+
     }
 }

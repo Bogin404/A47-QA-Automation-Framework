@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 public class ProfileTest extends BaseTest{
     @Test
 public static void changeProfileNameTest() throws InterruptedException{
-    openLoginURL();
 
     enterEmail("popapipa@gmail.com");
 
