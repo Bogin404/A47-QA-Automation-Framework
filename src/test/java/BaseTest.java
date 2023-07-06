@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -13,9 +15,13 @@ import org.testng.annotations.Parameters;
 import java.time.Duration;
 import java.util.UUID;
 
+
+
 public class BaseTest {
     public static WebDriver driver = null;
-    public static String url = "https://qa.koel.app/";
+    public static String url;
+
+    static WebDriverWait wait;
 
     @BeforeSuite
     static void setupClass() {
@@ -32,6 +38,7 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         String url = BaseURL;
         driver.get(url);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(7));
     }
 
     @AfterMethod
@@ -40,19 +47,22 @@ public class BaseTest {
     }
 
     protected static void clickSubmit() {
-        WebElement submitLogin = driver.findElement(By.cssSelector("button[type='submit']"));
+        WebElement submitLogin = wait.until(ExpectedConditions.elementToBeClickable
+                (By.cssSelector("button[type='submit']")));
         submitLogin.click();
     }
 
     protected static void enterPassword(String password) {
-        WebElement passwordInput = driver.findElement(By.cssSelector("[type='password']"));
+        WebElement passwordInput = wait.until(ExpectedConditions.elementToBeClickable
+                (By.cssSelector("[type='password']")));
         passwordInput.click();
         passwordInput.clear();
         passwordInput.sendKeys(password);
     }
 
     protected static void enterEmail(String email) {
-        WebElement emailInput = driver.findElement(By.cssSelector("[type='email']"));
+        WebElement emailInput = wait.until(ExpectedConditions.elementToBeClickable
+                (By.cssSelector("[type='email']")));
         emailInput.click();
         emailInput.clear();
         emailInput.sendKeys(email);
@@ -62,28 +72,32 @@ public class BaseTest {
 
 
     protected static void clickAvatarIcon(){
-        WebElement avatarIcon = driver.findElement(By.cssSelector("img.avatar"));
+        WebElement avatarIcon = wait.until(ExpectedConditions.elementToBeClickable
+                (By.cssSelector("img.avatar")));
         avatarIcon.click();
     }
 
     protected static String generateRandomName(){
+
         return UUID.randomUUID().toString().replace("-","");
     }
 
     protected static void providePassword(String password){
-        WebElement currentPassword = driver.findElement(By.cssSelector("[name='current_password']"));
+        WebElement currentPassword = wait.until(ExpectedConditions.elementToBeClickable
+                (By.cssSelector("[name='current_password']")));
         currentPassword.clear();
         currentPassword.sendKeys(password);
     }
 
     protected static void provideProfileName(String name){
-        WebElement profileName = driver.findElement(By.cssSelector("[name='name']"));
+        WebElement profileName = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[name='name']")));
         profileName.clear();
         profileName.sendKeys(name);
     }
 
     protected static void clickSaveButton(){
-        WebElement saveButton = driver.findElement(By.cssSelector("button.btn-submit"));
+        WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable
+                (By.cssSelector("button.btn-submit")));
 
     }
 
@@ -96,43 +110,45 @@ public class BaseTest {
     //
 
     protected void verifySuccessMessageText() {
-        WebElement successNewPlaylist = driver.findElement(By.xpath(
-                "//div[contains(text(), 'new playlist17')]"));
+        WebElement successNewPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                "//div[contains(text(), 'new playlist17')]")));
         Assert.assertTrue(successNewPlaylist.isDisplayed());
     }
 
     protected void selectSavePlaylist() {
-        WebElement savePlaylistButton = driver.findElement(By.xpath(
-                "//*[@id='songResultsWrapper']//button[@title='Save']"));
+        WebElement savePlaylistButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                "//*[@id='songResultsWrapper']//button[@title='Save']")));
         savePlaylistButton.click();
     }
 
     protected void enterNewPlaylistName(String newPlaylistName) {
-        WebElement createPlaylistField = driver.findElement(By.xpath(
-                "//*[@id='songResultsWrapper']//input[@data-test='new-playlist-name']"));
+        WebElement createPlaylistField = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                "//*[@id='songResultsWrapper']//input[@data-test='new-playlist-name']")));
         createPlaylistField.click();
         createPlaylistField.sendKeys(newPlaylistName);
     }
 
     protected void clickAddTo() {
-        WebElement addToButton = driver.findElement(By.cssSelector("[class='btn-add-to']"));
+        WebElement addToButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[class='btn-add-to']")));
         addToButton.click();
     }
 
     protected void clickFirstSong() {
-        WebElement firstSong = driver.findElement(By.xpath(
-                "(//*[@id='songResultsWrapper']//tr[contains(@class,'song-item')])[1]"));
+        WebElement firstSong = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                "(//*[@id='songResultsWrapper']//tr[contains(@class,'song-item')])[1]")));
         firstSong.click();
     }
 
     protected void clickViewAll() {
-        WebElement viewAllButton = driver.findElement(By.cssSelector("[data-test='view-all-songs-btn']"));
+        WebElement viewAllButton = wait.until(ExpectedConditions.elementToBeClickable
+                (By.cssSelector("[data-test='view-all-songs-btn']")));
         viewAllButton.click();
 
     }
 
     protected void searchSongName(String songName) {
-        WebElement searchField = driver.findElement(By.cssSelector("[name='q']"));
+        WebElement searchField = wait.until(ExpectedConditions.elementToBeClickable
+                (By.cssSelector("[name='q']")));
         searchField.click();
         searchField.sendKeys(songName);
     }
@@ -147,17 +163,20 @@ public class BaseTest {
     //
 
     protected void verifySongPlaying() {
-        WebElement progressBar = driver.findElement(By.cssSelector("[class='plyr__progress--played']"));
+        WebElement progressBar = wait.until(ExpectedConditions.elementToBeClickable
+                (By.cssSelector("[class='plyr__progress--played']")));
         Assert.assertTrue(progressBar.isDisplayed());
     }
 
     protected void clickPlay() {
-        WebElement playControl = driver.findElement(By.cssSelector("span[class='play']"));
+        WebElement playControl = wait.until(ExpectedConditions.elementToBeClickable
+                (By.cssSelector("span[class='play']")));
         playControl.click();
     }
 
     protected void clickPlayNext() {
-        WebElement playNextControl = driver.findElement(By.cssSelector("[class='next fa fa-step-forward control']"));
+        WebElement playNextControl = wait.until(ExpectedConditions.elementToBeClickable
+                (By.xpath("//i[@title='Play next song']")));
         playNextControl.click();
     }
 
@@ -171,20 +190,24 @@ public class BaseTest {
     //
 
     protected String  verifyConfirmationText() {
-        WebElement successDeletedPlaylist = driver.findElement(By.cssSelector("div.success.show"));
+        WebElement successDeletedPlaylist = wait.until(ExpectedConditions.elementToBeClickable
+                (By.cssSelector("div.success.show")));
         return successDeletedPlaylist.getText();
     }
 
     protected void removePlaylist() {
-        WebElement deletePlaylistButton = driver.findElement(By.cssSelector("[class='del btn-delete-playlist']"));
+        WebElement deletePlaylistButton = wait.until(ExpectedConditions.elementToBeClickable
+                (By.cssSelector("[class='del btn-delete-playlist']")));
         deletePlaylistButton.click();
 
-        WebElement confirmDeletePlaylist = driver.findElement(By.cssSelector("[class='ok']"));
+        WebElement confirmDeletePlaylist = wait.until(ExpectedConditions.elementToBeClickable
+                (By.cssSelector("[class='ok']")));
         confirmDeletePlaylist.click();
     }
 
     protected void clickPlaylist() {
-        WebElement playlistToDelete = driver.findElement(By.cssSelector("[href='#!/playlist/63201']"));
+        WebElement playlistToDelete = wait.until(ExpectedConditions.elementToBeClickable
+                (By.cssSelector("[href='#!/playlist/63347']")));
         playlistToDelete.click();
 
     }

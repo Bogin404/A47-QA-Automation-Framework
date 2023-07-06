@@ -2,7 +2,7 @@ import org.testng.annotations.Test;
 
 public class Homework17 extends BaseTest{
     @Test
-    public void addSongToPlaylist() throws InterruptedException{
+    public void addSongToPlaylist() {
 
         enterEmail("popapipa@gmail.com");
 
@@ -10,14 +10,10 @@ public class Homework17 extends BaseTest{
 
         clickSubmit();
 
-        Thread.sleep(2000);
-
         searchSongName("pluto");
 
-        Thread.sleep(2000);
 
         clickViewAll();
-        Thread.sleep(2000);
 
         clickFirstSong();
 
@@ -27,7 +23,6 @@ public class Homework17 extends BaseTest{
 
         selectSavePlaylist();
 
-        Thread.sleep(2000);
 
         verifySuccessMessageText();
         
