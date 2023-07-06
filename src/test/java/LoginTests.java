@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 public class LoginTests extends BaseTest {
     @Test
     public void LoginValidEmailPasswordTest() {
-        openLoginURL();
 
         enterEmail("popapipa@gmail.com");
 
@@ -22,8 +21,6 @@ public class LoginTests extends BaseTest {
 
     @Test
     public static void LoginEmptyEmailPasswordTest(){
-
-        openLoginURL();
 
         enterEmail("");
 
