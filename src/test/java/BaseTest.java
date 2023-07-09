@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -20,8 +21,9 @@ import java.util.UUID;
 public class BaseTest {
     public static WebDriver driver = null;
     public static String url;
+    public static WebDriverWait wait;
 
-    static WebDriverWait wait;
+    public static Actions actions;
 
     @BeforeSuite
     static void setupClass() {
@@ -39,6 +41,7 @@ public class BaseTest {
         String url = BaseURL;
         driver.get(url);
         wait = new WebDriverWait(driver, Duration.ofSeconds(7));
+        actions = new Actions(driver);
     }
 
     @AfterMethod
@@ -175,8 +178,8 @@ public class BaseTest {
     }
 
     protected void clickPlayNext() {
-        WebElement playNextControl = wait.until(ExpectedConditions.elementToBeClickable
-                (By.xpath("//i[@title='Play next song']")));
+        WebElement playNextControl = driver.findElement(
+                (By.cssSelector("footer div i.next")));
         playNextControl.click();
     }
 
@@ -207,7 +210,7 @@ public class BaseTest {
 
     protected void clickPlaylist() {
         WebElement playlistToDelete = wait.until(ExpectedConditions.elementToBeClickable
-                (By.cssSelector("[href='#!/playlist/63347']")));
+                (By.cssSelector("[href='#!/playlist/63351']")));
         playlistToDelete.click();
 
     }
