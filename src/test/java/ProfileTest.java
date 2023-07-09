@@ -1,11 +1,12 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class ProfileTest extends BaseTest{
     @Test
-public static void changeProfileNameTest() throws InterruptedException{
+public static void changeProfileNameTest() {
 
     enterEmail("popapipa@gmail.com");
 
@@ -13,10 +14,8 @@ public static void changeProfileNameTest() throws InterruptedException{
 
     clickSubmit();
 
-        Thread.sleep(2000);
 
-
-        clickAvatarIcon();
+    clickAvatarIcon();
 
    String randomName = generateRandomName();
 
@@ -26,8 +25,7 @@ public static void changeProfileNameTest() throws InterruptedException{
 
    clickSaveButton();
 
-   Thread.sleep(2000);
 
-   WebElement actualProfileName = driver.findElement(By.cssSelector("a.view-profile>span"));
+   WebElement actualProfileName = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a.view-profile>span")));
    Assert.assertEquals(actualProfileName.getText(), randomName);
 }}
