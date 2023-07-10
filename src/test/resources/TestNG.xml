@@ -7,10 +7,10 @@
     <test name="Example Test" preserve-order="false">
         <classes>
             <class name="LoginTests"/>
-            <class name="BaseTest">
-                <methods>
-            <exclude name="ProfileTest"/>
-                </methods>
+            <class name="BaseTest"/>
+            <class name="ProfileTest">
+
+
             </class>
             <class name="Homework17"/>
 
