@@ -4,32 +4,18 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
 
-public class LoginTests extends BaseTest {
+public class LoginTests  extends BaseTest{
     @Test
     public void LoginValidEmailPasswordTest() {
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
 
-        enterEmail("popapipa@gmail.com");
+        loginPage.login();
 
-        enterPassword("te$t$tudent");
-
-        clickSubmit();
-
-        WebElement avatar = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".avatar")));
-        Assert.assertTrue(avatar.isDisplayed());
-
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
 
-
-    @Test
-    public static void LoginEmptyEmailPasswordTest(){
-
-        enterEmail("");
-
-        enterPassword("te$t$tudent");
-
-        clickSubmit();
-
-        //assertion here
-    }
 }

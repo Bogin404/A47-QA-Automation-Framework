@@ -1,36 +1,31 @@
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.LoginPage;
+import pages.AllSongsPage;
 
 public class Homework17 extends BaseTest{
     @Test
     public void addSongToPlaylist() {
 
-        enterEmail("popapipa@gmail.com");
+        AllSongsPage allSongsPage = new AllSongsPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
 
-        enterPassword("te$t$tudent");
+        loginPage.login();
 
-        clickSubmit();
+        allSongsPage.searchSongName("pluto");
 
-        searchSongName("pluto");
+        allSongsPage.clickViewAll();
 
+        allSongsPage.clickFirstSong();
 
-        clickViewAll();
+        allSongsPage.clickAddTo();
 
-        clickFirstSong();
+        allSongsPage.enterNewPlaylistName("new playlist17");
 
-        clickAddTo();
+        allSongsPage.selectSavePlaylist();
 
-        enterNewPlaylistName("new playlist17");
-
-        selectSavePlaylist();
-
-
-        verifySuccessMessageText();
-        
-
-
-
+        Assert.assertTrue(allSongsPage.verifySuccessMessageText().isDisplayed());
 
     }
-
 
 }
