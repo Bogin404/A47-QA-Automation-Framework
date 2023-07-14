@@ -12,17 +12,13 @@ public class Homework17 extends BaseTest{
 
         loginPage.login();
 
-        allSongsPage.searchSongName("pluto");
-
-        allSongsPage.clickViewAll();
-
-        allSongsPage.clickFirstSong();
-
-        allSongsPage.clickAddTo();
-
-        allSongsPage.enterNewPlaylistName("new playlist17");
-
-        allSongsPage.selectSavePlaylist();
+        allSongsPage
+                .searchSongName("pluto")
+                .clickViewAll()
+                .clickFirstSong()
+                .clickAddTo()
+                .enterNewPlaylistName("new playlist17")
+                .selectSavePlaylist();
 
         Assert.assertTrue(allSongsPage.verifySuccessMessageText().isDisplayed());
 

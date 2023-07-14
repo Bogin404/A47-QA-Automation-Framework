@@ -12,8 +12,8 @@ public class Homework21 extends BaseTest{
 
         loginPage.login();
 
-        homePage.doubleClickPlaylist();
-        homePage.renameExistingPlaylist(newName);
+        //update existingPlaylist locator each time before running
+        homePage.doubleClickPlaylist().renameExistingPlaylist(newName);
         Assert.assertTrue(homePage.verifyPlaylistIsRenamed().isDisplayed());
 
 

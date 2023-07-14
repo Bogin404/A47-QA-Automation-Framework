@@ -1,43 +1,52 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.Assert;
-
-import java.util.UUID;
+import org.openqa.selenium.support.FindBy;
 
 public class ProfilePage extends BasePage{
 
     public ProfilePage(WebDriver givenDriver) {
         super(givenDriver);
     }
-    By avatarIcon = By.cssSelector("#userBadge > a.view-profile");
-    By currentPassword = By.cssSelector("[name='current_password']");
-    By profileName = By.cssSelector("[name='name']");
-    By saveButton = By.cssSelector("button.btn-submit");
-    String randomName = generateRandomName();
-    By actualProfileName = By.cssSelector("#userBadge > a.view-profile > span");
 
-    public void clickAvatarIcon(){
-        findElement(avatarIcon).click();
+    @FindBy(css = "#userBadge > a.view-profile")
+    WebElement avatarIcon;
+    @FindBy(css = "[name='current_password']")
+    WebElement currentPassword;
+    @FindBy(css = "[name='name']")
+    WebElement profileName;
+    @FindBy(css = "button.btn-submit")
+    WebElement saveButton;
+    //By avatarIcon = By.cssSelector("#userBadge > a.view-profile");
+    //By currentPassword = By.cssSelector("[name='current_password']");
+    //By profileName = By.cssSelector("[name='name']");
+    //By saveButton = By.cssSelector("button.btn-submit");
+    String randomName = generateRandomName();
+
+
+    public ProfilePage clickAvatarIcon(){
+        avatarIcon.click();
+        return this;
     }
-    public void providePassword(String password){
-        findElement(currentPassword).clear();
-        findElement(currentPassword).sendKeys(password);
+    public ProfilePage providePassword(String password){
+        currentPassword.clear();
+        currentPassword.sendKeys(password);
+        return this;
     }
-    public void provideProfileName(){
-        findElement(profileName).clear();
-        findElement(profileName).sendKeys(randomName);
+    public ProfilePage provideProfileName(){
+        profileName.clear();
+        profileName.sendKeys(randomName);
+        return this;
     }
-    public void clickSaveButton(){
-        findElement(saveButton).click();
+    public ProfilePage clickSaveButton(){
+        saveButton.click();
+        return this;
     }
 
     //Doesn't work
     //
-    //
+    //By actualProfileName = By.cssSelector("#userBadge > a.view-profile > span");
 //    public String returnNewName(){
 //        return randomName;
 //    }

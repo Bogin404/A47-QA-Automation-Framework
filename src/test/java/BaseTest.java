@@ -38,7 +38,7 @@ public class BaseTest {
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        String url = BaseURL;
+        url = BaseURL;
         driver.get(url);
         wait = new WebDriverWait(driver, Duration.ofSeconds(7));
         actions = new Actions(driver);

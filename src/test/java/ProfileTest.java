@@ -16,17 +16,7 @@ public static void changeProfileNameTest() {
 
         loginPage.login();
 
-
-
-        profilePage.clickAvatarIcon();
-
-
-
-        profilePage.providePassword("te$t$tudent");
-
-        profilePage.provideProfileName();
-
-        profilePage.clickSaveButton();
+        profilePage.clickAvatarIcon().providePassword("te$t$tudent").provideProfileName().clickSaveButton();
 
         //Doesn't work
             //

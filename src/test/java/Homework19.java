@@ -11,9 +11,9 @@ public class Homework19 extends BaseTest{
         PlaylistPage playlistPage = new PlaylistPage(driver);
 
         loginPage.login();
+        //update playlistToDelete variable to existing playlist before running this test
+        playlistPage.clickPlaylist().removePlaylist();
 
-        playlistPage.clickPlaylist();
-        playlistPage.removePlaylist();
         Assert.assertTrue(playlistPage.verifyConfirmationText());
 
     }
