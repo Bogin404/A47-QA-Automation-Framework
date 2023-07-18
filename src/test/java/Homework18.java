@@ -8,12 +8,9 @@ public class Homework18 extends BaseTest{
     public void playSong() {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
-
         loginPage.login();
 
-
-        homePage.clickPlayNext();
-        homePage.clickPlay();
+        homePage.clickPlayNext().clickPlay();
         Assert.assertTrue(homePage.verifySongPlaying().isDisplayed());
 
     }
