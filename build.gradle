@@ -18,18 +18,23 @@ dependencies {
 test {
     useTestNG() {
         suites "src/test/resources/TestNG.xml"
+
     }
 }
 
 task homework18(type: Test){
     useTestNG(){
         suites "src/test/resources/Homework18.xml"
+        systemProperty "browser", System.getProperty("browserName")
+
     }
 }
 
 task homework19(type: Test){
     useTestNG(){
         suites "src/test/resources/Homework19.xml"
+        systemProperty "browser", System.getProperty("browserName")
+
     }
 }
 
@@ -42,5 +47,6 @@ task homework20(type: Test){
 task homework21(type: Test){
     useTestNG(){
         suites "src/test/resources/Homework21.xml"
+        systemProperty "browser", System.getProperty("browserName")
     }
 }
